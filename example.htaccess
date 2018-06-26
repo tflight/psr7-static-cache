@@ -1,0 +1,13 @@
+RewriteEngine On
+
+# Serve Cached Page If Available...
+RewriteCond %{REQUEST_URI} ^/?$
+RewriteCond %{DOCUMENT_ROOT}/c/index.html -f
+RewriteRule .? c/index.html [L]
+RewriteCond %{DOCUMENT_ROOT}/c%{REQUEST_URI}.html -f
+RewriteRule . c%{REQUEST_URI}.html [L]
+
+# Otherwise, route to the front controller
+RewriteCond %{REQUEST_FILENAME} !-d
+RewriteCond %{REQUEST_FILENAME} !-f
+RewriteRule ^ index.php [L]
